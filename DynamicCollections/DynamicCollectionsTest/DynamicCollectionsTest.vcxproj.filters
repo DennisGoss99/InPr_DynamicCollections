@@ -15,8 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DynamicCollectionsTest.cpp">
+    <ClCompile Include="StackTest.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicCollectionsTest.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StackTest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -33,6 +33,9 @@
     <ClCompile Include="BaseContainer\Dictionary.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="BaseContainer\LinkedListNode.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseContainer\Queue.h">
@@ -51,6 +54,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="BaseContainer\Dictionary.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseContainer\LinkedListNode.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseContainer\CollectionError.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

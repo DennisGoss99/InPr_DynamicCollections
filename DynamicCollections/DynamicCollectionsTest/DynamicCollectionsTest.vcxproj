@@ -139,12 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DynamicCollectionsTest.cpp" />
+    <ClCompile Include="DynamicCollectionsTest.c" />
+    <ClCompile Include="StackTest.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynamicCollections\DynamicCollections.vcxproj">
       <Project>{7a1525fc-992d-4181-82d8-e3eecfd6cfa4}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StackTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

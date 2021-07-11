@@ -145,14 +145,17 @@
     <ClCompile Include="BaseContainer\Queue.c" />
     <ClCompile Include="GeneralContainer\String.c" />
     <ClCompile Include="BaseContainer\Stack.c" />
+    <ClCompile Include="BaseContainer\LinkedListNode.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseContainer\CollectionError.h" />
     <ClInclude Include="BaseContainer\List.h" />
     <ClInclude Include="BaseContainer\Queue.h" />
     <ClInclude Include="BaseContainer\Dictionary.h" />
     <ClInclude Include="GeneralContainer\String.h" />
     <ClInclude Include="BaseContainer\Stack.h" />
     <ClInclude Include="BaseContainer\LinkedList.h" />
+    <ClInclude Include="BaseContainer\LinkedListNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

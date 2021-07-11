@@ -3,7 +3,10 @@
 
 typedef struct Dictionary_
 {
-	unsigned int Length;
+	unsigned int Size;
 }Dictionary;
+
+void DictionaryInitialize(Dictionary* dictionary);
+void DictionaryDestroy(Dictionary* dictionary);
 
 #endif
