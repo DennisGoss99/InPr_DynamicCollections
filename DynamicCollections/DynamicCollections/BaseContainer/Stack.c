@@ -1,5 +1,6 @@
 #include "Stack.h"
 #include <malloc.h>
+#include <string.h>
 
 void StackInitialize(Stack* stack, unsigned int sizeOfSingleElement)
 {
