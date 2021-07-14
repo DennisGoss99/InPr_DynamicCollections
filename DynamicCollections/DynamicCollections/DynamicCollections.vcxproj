@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseContainer\CollectionError.c" />
     <ClCompile Include="BaseContainer\List.c" />
     <ClCompile Include="BaseContainer\LinkedList.c" />
     <ClCompile Include="BaseContainer\Dictionary.c" />

@@ -36,6 +36,9 @@
     <ClCompile Include="BaseContainer\LinkedListNode.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="BaseContainer\CollectionError.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseContainer\Queue.h">

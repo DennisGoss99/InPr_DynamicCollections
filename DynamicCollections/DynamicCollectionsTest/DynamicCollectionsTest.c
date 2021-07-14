@@ -2,15 +2,16 @@
 
 #include "../DynamicCollections/BaseContainer/List.h"
 #include "StackTest.h"
+#include "TestSystem/Tester.h"
+
 
 int main()
 {
-    printf("-----<Starting Tests>-----\n");
+    testPrintHeader("-----<Starting Tests>-----");
 
-    printf("-----<Testing Stack.h>-----\n");
     StackTestStart();
 
-    printf("-----<Tests Finished>-----\n");
+    testPrintSummery();
     
     return 0;
 }

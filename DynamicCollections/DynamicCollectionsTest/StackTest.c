@@ -1,10 +1,12 @@
 #include "StackTest.h"
 #include "../DynamicCollections/BaseContainer/Stack.h"
+#include "TestSystem/Tester.h"
 
 #include <assert.h>
 
 void StackTestStart()
 {
+	testPrintHeader("-----<Testing Stack.h>-----");
 	StackAddElementTest();
 	StackRemoveNothingTest();
 	StackRemoveElementTest();
@@ -18,9 +20,9 @@ void StackAddElementTest()
 
 	StackInitialize(&stack, sizeof(int));
 
-	CollectionError error = StackPush(&stack, &a);
+	const CollectionError error = StackPush(&stack, &a);
 
-	assert(error == CollectionNoError);
+	test_collectionError(error, CollectionNoError, "Stack Test: Push int value");
 }
 
 void StackRemoveNothingTest()
@@ -29,10 +31,10 @@ void StackRemoveNothingTest()
 	int dummy = -1;
 
 	StackInitialize(&stack, sizeof(int));
-	
-	CollectionError error = StackPull(&stack, &dummy);
 
-	assert(error == CollectionEmpty);
+	const CollectionError error = StackPull(&stack, &dummy);
+
+	test_collectionError(error, CollectionEmpty, "Stack Test: Pull empty stack");
 }
 
 void StackRemoveElementTest()
@@ -56,7 +58,7 @@ void StackAddAndRemoveTest()
 	{
 		int expectedA = -1;
 		StackPull(&stack, &expectedA);
-
-		assert(expectedA == 5);
+		
+		test_int(5, expectedA, "Stack Test: Pull int value");
 	}
 }

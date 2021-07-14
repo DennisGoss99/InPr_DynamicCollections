@@ -15,4 +15,7 @@ typedef enum CollectionError_
 
 }CollectionError;
 
+const char* CollectionErrorToString(CollectionError collectionError);
+
+
 #endif

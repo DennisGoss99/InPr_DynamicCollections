@@ -139,8 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TestSystem\CollectionTester.c" />
     <ClCompile Include="DynamicCollectionsTest.c" />
     <ClCompile Include="StackTest.c" />
+    <ClCompile Include="TestSystem\Tester.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynamicCollections\DynamicCollections.vcxproj">
@@ -148,7 +150,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TestSystem\CollectionTester.h" />
     <ClInclude Include="StackTest.h" />
+    <ClInclude Include="TestSystem\Tester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
