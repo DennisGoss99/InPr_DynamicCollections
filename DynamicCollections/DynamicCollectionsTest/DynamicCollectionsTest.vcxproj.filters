@@ -27,6 +27,9 @@
     <ClCompile Include="TestSystem\CollectionTester.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="ListTest.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackTest.h">
@@ -36,6 +39,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TestSystem\CollectionTester.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ListTest.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

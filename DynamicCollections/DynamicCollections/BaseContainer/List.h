@@ -1,6 +1,12 @@
 #ifndef ListInclude
 #define ListInclude
 
+#define EMPTYLIST (List){0}
+
+#include "CollectionError.h"
+
+
+
 typedef struct List_
 {
 	void** Content;
@@ -16,31 +22,25 @@ typedef struct List_
  * eg: 'List a = EMPTYLIST;'
  * --------------------
  */
-void ListInitialize(List* list, unsigned int count, unsigned int sizeOfObject);
+void ListInitialize(List* list, unsigned int count, unsigned int sizeOfSingleElement);
 
-void ListDestruction(List* path);
+void ListDestruction(List* list);
 
 /*
  * Function:  ListItemInsertAt
  * --------------------
  * adds parameter value to index in parameter list->Content
  * --------------------
- *  returns: 0 if successful
- *	  -1 List is NULL
- *	  -2 Out of bounds
  */
-int ListItemInsertAt(List* list, unsigned int indexValue, void* value);
+CollectionError ListItemInsertAt(List* list, unsigned int indexValue, void* value);
 
 /*
  * Function:  ListItemGet
  * --------------------
  * adds parameter value to index in parameter list->Content
  * --------------------
- *  returns: Value if successful
- *	  NULL List is NULL
- *	  NULL Out of bounds
  */
-void* ListItemGet(List* list, unsigned int index);
+CollectionError ListItemGet(List* list, unsigned int index, void* element);
 
 /*
  * Function:  ListItemAdd
@@ -49,38 +49,27 @@ void* ListItemGet(List* list, unsigned int index);
  * --------------------
  *
  * When the List is full, it will be made bigger
- *
- *  returns: 0 if successful
- *	  -1 List is NULL
- *	  -2 Out of bounds
- *	  -9 Calloc failed
  */
-int ListItemAdd(List* list, void* value);
+CollectionError ListItemAdd(List* list, void* value);
 
 /*
  * Function:  ListItemRemove
  * --------------------
  * adds parameter value to index in parameter list->Content
  * --------------------
- *  returns: 0 if successful
- *     1 Removed Value already NULL
- *	  -1 List is NULL
- *	  -2 Out of bounds
  */
-int ListItemRemove(List* list, unsigned int index);
+CollectionError ListItemRemove(List* list, unsigned int index);
 
 /*
  * Function:  ListClear
  * --------------------
  * sets all values in list->Content = 0
  * --------------------
- *  returns: 0 if successful
- *	  -1 List is NULL
  */
-int ListClear(List* list);
+CollectionError ListClear(List* list);
 
-void ListPrint_string(List* list);
-
-void ListPrint_int(List* list);
+//void ListPrint_string(List* list);
+//
+//void ListPrint_int(List* list);
 
 #endif

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ListTest.c" />
     <ClCompile Include="TestSystem\CollectionTester.c" />
     <ClCompile Include="DynamicCollectionsTest.c" />
     <ClCompile Include="StackTest.c" />
@@ -150,6 +151,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ListTest.h" />
     <ClInclude Include="TestSystem\CollectionTester.h" />
     <ClInclude Include="StackTest.h" />
     <ClInclude Include="TestSystem\Tester.h" />

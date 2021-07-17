@@ -4,12 +4,10 @@
 typedef enum CollectionError_
 {
 	CollectionNoError,
-
-
+	
 	CollectionOutOfMemory,
-
-
 	CollectionEmpty,
+	CollectionArrayIndexOutOfBounds
 
 
 

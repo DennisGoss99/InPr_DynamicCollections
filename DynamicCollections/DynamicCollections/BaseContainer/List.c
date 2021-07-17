@@ -1,8 +1,8 @@
 #include "List.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 void ListInitialize(List* list, unsigned int count, unsigned int sizeOfSingleElement)
 {
@@ -35,36 +35,54 @@ void ListDestruction(List* list)
 
 	free(list->Content);
 	list->Content = NULL;
+	
 }
 
-int ListItemInsertAt(List* list, unsigned int indexValue, void* value)
+CollectionError ListItemInsertAt(List* list, unsigned int indexValue, void* value)
 {
 	if (list == NULL)
-		return -1;
+		return CollectionEmpty;
 
-	if (indexValue < 0 || indexValue >(list->Size - 1))
-		return -2;
+	if (indexValue > list->Size - 1)
+		return CollectionArrayIndexOutOfBounds;
 
 	list->Content[indexValue] = value;
 
-	return 0;
+	return CollectionNoError;
 }
 
-void* ListItemGet(List* list, unsigned int index)
+CollectionError ListItemGet(List* list, unsigned int index, void* element)
 {
 	if (index > list->Size - 1)
-		return NULL;
+	{
+		int null = NULL;
+		memcpy(element, &null, sizeof(void*));
+		return CollectionArrayIndexOutOfBounds;
+	}
 
 	if (list == NULL)
-		return NULL;
+	{
+		int null = NULL;
+		memcpy(element, &null, sizeof(void*));
+		return CollectionEmpty;
+	}
 
-	return list->Content[index];
+	if(list->Content[index] == NULL)
+	{
+		int null = NULL;
+		memcpy(element, &null, sizeof(void*));
+		return CollectionNoError;
+	}
+	
+	memcpy(element, &list->Content[index], sizeof(void*));
+
+	return CollectionNoError;
 }
 
-int ListItemAdd(List* list, void* value)
+CollectionError ListItemAdd(List* list, void* value)
 {
 	if (list == NULL)
-		return -1;
+		return CollectionEmpty;
 
 	int unsigned addLocation = 0;
 
@@ -82,7 +100,7 @@ int ListItemAdd(List* list, void* value)
 		void* reallocOutput = realloc(list->Content, list->Size * list->SizeOfSingleElement);
 
 		if (reallocOutput == NULL)
-			return -9;
+			return CollectionOutOfMemory;
 
 
 		list->Content = reallocOutput;
@@ -94,16 +112,16 @@ int ListItemAdd(List* list, void* value)
 	return ListItemInsertAt(list, addLocation, value);
 }
 
-int ListItemRemove(List* list, unsigned int index)
+CollectionError ListItemRemove(List* list, unsigned int index)
 {
 	if (index > list->Size - 1)
-		return -2;
+		return CollectionArrayIndexOutOfBounds;
 
 	if (list == NULL)
-		return -1;
+		return CollectionEmpty;
 
 	if (list->Content[index] == NULL)
-		return 1;
+		return CollectionNoError;
 
 	if (list->Content[index] != NULL)
 	{
@@ -111,42 +129,42 @@ int ListItemRemove(List* list, unsigned int index)
 		list->Content[index] = NULL;
 	}
 
-	return 0;
+	return CollectionNoError;
 }
 
-int ListClear(List* list)
+CollectionError ListClear(List* list)
 {
 	if (list == NULL)
-		return -1;
+		return CollectionEmpty;
 
 	for (int i = 0; i < list->Size; ++i)
 		ListItemRemove(list, i);
 
-	return 0;
+	return CollectionNoError;
 }
 
-void ListPrint_string(List* list)
-{
-	printf("{");
-	for (int i = 0; i < list->Size; ++i)
-	{
-		if (i != 0)
-			printf(",");
-
-		printf("%s", ListItemGet(list, i));
-	}
-	printf("}");
-}
-
-void ListPrint_int(List* list)
-{
-	printf("{");
-	for (int i = 0; i < list->Size; ++i)
-	{
-		if (i != 0)
-			printf(",");
-
-		printf("%i", ListItemGet(list, i));
-	}
-	printf("}");
-}
+//void ListPrint_string(List* list)
+//{
+//	printf("{");
+//	for (int i = 0; i < list->Size; ++i)
+//	{
+//		if (i != 0)
+//			printf(",");
+//
+//		printf("%s", ListItemGet(list, i));
+//	}
+//	printf("}");
+//}
+//
+//void ListPrint_int(List* list)
+//{
+//	printf("{");
+//	for (int i = 0; i < list->Size; ++i)
+//	{
+//		if (i != 0)
+//			printf(",");
+//
+//		printf("%i", ListItemGet(list, i));
+//	}
+//	printf("}");
+//}
