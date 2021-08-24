@@ -5,6 +5,6 @@ void StackTestStart();
 static void StackAddElementTest();
 static void StackRemoveNothingTest();
 static void StackAddAndRemoveTest();
-static void StackRemoveElementTest();
+static void StackComplexTest();
 
 #endif

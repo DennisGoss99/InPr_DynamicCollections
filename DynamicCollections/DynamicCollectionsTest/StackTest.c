@@ -8,9 +8,9 @@ void StackTestStart()
 {
 	testPrintHeader("-----<Testing Stack.h>-----");
 	StackAddElementTest();
-	StackRemoveNothingTest();
-	StackRemoveElementTest();
+	StackRemoveNothingTest();	
 	StackAddAndRemoveTest();
+	StackComplexTest();
 }
 
 void StackAddElementTest()
@@ -37,11 +37,6 @@ void StackRemoveNothingTest()
 	test_collectionError(error, CollectionEmpty, "Stack Test: Pull empty stack");
 }
 
-void StackRemoveElementTest()
-{
-
-}
-
 void StackAddAndRemoveTest()
 {
 	Stack stack;
@@ -61,4 +56,67 @@ void StackAddAndRemoveTest()
 		
 		test_int(5, expectedA, "Stack Test: Pull int value");
 	}
+}
+
+void StackComplexTest()
+{
+	char x = 0;
+	CollectionError collectionError;
+	Stack stack;
+	StackInitialize(&stack, sizeof(char));
+
+	// Add
+	{
+		char a[] = "Hello";
+		StackPush(&stack, &a[0]);
+		StackPush(&stack, &a[1]);
+		StackPush(&stack, &a[2]);
+		StackPush(&stack, &a[3]);
+		StackPush(&stack, &a[4]);
+	}
+
+	// Pull
+	{
+		StackPull(&stack, &x);
+		assert(x == 'o');
+
+		StackPull(&stack, &x);
+		assert(x == 'l');
+
+		StackPull(&stack, &x);
+		assert(x == 'l');
+
+		StackPull(&stack, &x);
+		assert(x == 'e');
+
+		StackPull(&stack, &x);
+		assert(x == 'H');
+	}
+
+	// Empty
+	collectionError = StackPull(&stack, &x);
+	assert(collectionError == CollectionEmpty);
+
+	// Add
+	{
+		char b[] = "123";
+		StackPush(&stack, &b[0]);
+		StackPush(&stack, &b[1]);
+		StackPush(&stack, &b[2]);
+	}
+
+	// Pull
+	{
+		StackPull(&stack, &x);
+		assert(x == '3');
+
+		StackPull(&stack, &x);
+		assert(x == '2');
+
+		StackPull(&stack, &x);
+		assert(x == '1');
+	}
+
+	collectionError = StackPull(&stack, &x);
+	assert(collectionError == CollectionEmpty);
 }
