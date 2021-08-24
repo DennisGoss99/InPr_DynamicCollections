@@ -7,9 +7,10 @@ typedef enum CollectionError_
 	
 	CollectionOutOfMemory,
 	CollectionEmpty,
-	CollectionArrayIndexOutOfBounds
+	CollectionArrayIndexOutOfBounds,
 
-
+	CollectionNoElementSizeSpecified,
+	CollectionElementIsNullPointer
 
 }CollectionError;
 

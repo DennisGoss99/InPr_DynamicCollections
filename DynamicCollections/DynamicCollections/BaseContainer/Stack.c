@@ -6,74 +6,114 @@ void StackInitialize(Stack* stack, unsigned int sizeOfSingleElement)
 {
 	stack->Content = 0;
 	stack->SizeOfSingleElement = sizeOfSingleElement;
-	stack->Size = 0;	
+	stack->SizeUsed = 0;
+	stack->SizeAllocated = 0;
 }
 
-void StackDestroy(Stack* stack)
+void StackClear(Stack* stack)
 {
-	StackClear(stack);
+	free(stack->Content);
+
+	stack->Content = 0;
+	stack->SizeUsed = 0;
+	stack->SizeAllocated = 0;
 }
 
 CollectionError StackPush(Stack* stack, void* element)
 {
-	unsigned int newContentSize = ++stack->Size * stack->SizeOfSingleElement;
-	void* oldData = stack->Content;
-	void* newData = realloc(stack->Content, newContentSize);	// reallocate memory, if the content is null realloc will act like malloc.
-	void* insertionAdress = 0;
+	unsigned int sizeOfElement = stack->SizeOfSingleElement;
+	unsigned int dataSizeCurrent = stack->SizeUsed;
+	unsigned int dataSizeNew = (dataSizeCurrent + 1);
+	char needToReallocate = dataSizeNew >= stack->SizeAllocated;
+	void* dataCurrent = stack->Content;
+	void* dataNew = 0;
+	void* dataInsertionPoint = 0;
 
-	if (newData == 0)
+	if (!element)
 	{
-		return CollectionOutOfMemory;
+		return CollectionElementIsNullPointer;
 	}
 
-	stack->Content = newData;
-	insertionAdress = (void*)((unsigned int)stack->Content + stack->Size - 1u);
+	if (!sizeOfElement)
+	{
+		return CollectionNoElementSizeSpecified;
+	}
 
-	memcpy(insertionAdress, element, stack->SizeOfSingleElement);
+	if (needToReallocate)
+	{
+		unsigned int allocateSpace = dataSizeCurrent + StackThreshold;
+		unsigned int allocateSpaceInBytes = allocateSpace * sizeOfElement;
+
+		dataNew = realloc(dataCurrent, allocateSpaceInBytes);
+
+		if (!dataNew)
+		{
+			return CollectionOutOfMemory;
+		}
+
+		stack->SizeAllocated = allocateSpace;
+		stack->Content = dataNew;
+	}
+
+	dataNew = stack->Content;
+	dataInsertionPoint = (unsigned int)dataNew + dataSizeCurrent;
+
+	memcpy(dataInsertionPoint, element, sizeOfElement);
+
+	stack->SizeUsed++;
 
 	return CollectionNoError;
 }
 
 CollectionError StackPull(Stack* stack, void* element)
 {
-	if (stack->Size == 0)
+	unsigned int sizeOfElement = stack->SizeOfSingleElement;
+	unsigned int dataSizeCurrent = stack->SizeUsed;
+	unsigned int dataSizeNew = (dataSizeCurrent - 1);
+	char needToReallocate = (int)dataSizeNew < ((int)stack->SizeAllocated - (int)StackThreshold);
+	void* dataCurrent = stack->Content;
+	void* dataNew = 0;
+	void* dataExtractionPoint = 0;
+
+	if (!element)
+	{
+		return CollectionElementIsNullPointer;
+	}
+
+	if (!stack->Content)
 	{
 		return CollectionEmpty;
 	}
 
 	// Extract data before reallocation
-	void* sourceAdress = (unsigned int)stack->Content + stack->Size - 1;
+	dataExtractionPoint = (unsigned int)dataCurrent + dataSizeCurrent - 1u;
 
-	memcpy(element, sourceAdress, stack->SizeOfSingleElement);
+	memcpy(element, dataExtractionPoint, sizeOfElement);
 
-	if (stack->Size == 1)
+	if (dataSizeCurrent == 1)
 	{
-		return StackClear(stack);
+		StackClear(stack);
+
+		return CollectionNoError;
 	}
 
-	// Reallocate
-	unsigned int newSize = --stack->Size * stack->SizeOfSingleElement;
-	void* oldData = stack->Content;
-	void* newData = realloc(stack->Content, newSize); // Do not reallocate a size of 0 Bytes. It's not clearly defined. 
-
-	if (newData == 0)
+	if (needToReallocate)
 	{
-		return CollectionOutOfMemory;
+		unsigned int allocateSpace = dataSizeNew + StackThreshold;
+		unsigned int allocateSpaceInBytes = allocateSpace * sizeOfElement;
+
+		dataNew = realloc(dataCurrent, allocateSpaceInBytes);
+
+		if (!dataNew)
+		{
+			return CollectionOutOfMemory;
+		}
+
+		stack->Content = dataNew;
+		stack->SizeAllocated = allocateSpace;
 	}
-	else
-	{
-		stack->Content = newData;
-	}
 
-	return CollectionNoError;
-}
-
-CollectionError StackClear(Stack* stack)
-{
-	free(stack->Content); // Free can be called even if content is null. It then does nothing
-
-	stack->Content = 0;
-	stack->Size = 0;
+	stack->SizeUsed--;
 
 	return CollectionNoError;
 }
