@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DictionaryTest.c" />
     <ClCompile Include="ListTest.c" />
     <ClCompile Include="QueueTest.c" />
     <ClCompile Include="TestSystem\CollectionTester.c" />
@@ -152,6 +153,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DictionaryTest.h" />
     <ClInclude Include="ListTest.h" />
     <ClInclude Include="QueueTest.h" />
     <ClInclude Include="TestSystem\CollectionTester.h" />

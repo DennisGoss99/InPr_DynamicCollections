@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 #include "ListTest.h"
-#include "../DynamicCollections/BaseContainer/List.h"
 #include "StackTest.h"
 #include "QueueTest.h"
+#include "DictionaryTest.h"
 #include "TestSystem/Tester.h"
 
 
@@ -15,6 +15,8 @@ int main()
     QueueTestStart();
 
     ListTestStart();
+
+    DictionaryTestStart();
 	
     testPrintSummery();
     

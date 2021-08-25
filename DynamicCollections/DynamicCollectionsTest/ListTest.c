@@ -22,8 +22,7 @@ void ListTests()
 	List a = EMPTYLIST;
 	List b = EMPTYLIST;
 	List c = EMPTYLIST;
-
-	
+		
 	
 	// Test: 1 [char*]
 

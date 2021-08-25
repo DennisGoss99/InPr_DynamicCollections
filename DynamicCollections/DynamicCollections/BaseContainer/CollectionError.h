@@ -10,7 +10,10 @@ typedef enum CollectionError_
 	CollectionArrayIndexOutOfBounds,
 
 	CollectionNoElementSizeSpecified,
-	CollectionElementIsNullPointer
+	CollectionElementIsNullPointer,
+
+	//Dictionary specific
+	CollectionKeyAlreadyExists
 
 }CollectionError;
 

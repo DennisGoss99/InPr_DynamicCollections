@@ -33,6 +33,9 @@
     <ClCompile Include="QueueTest.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DictionaryTest.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackTest.h">
@@ -48,6 +51,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="QueueTest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DictionaryTest.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
