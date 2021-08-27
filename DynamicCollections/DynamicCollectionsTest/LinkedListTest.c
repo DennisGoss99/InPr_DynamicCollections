@@ -1,5 +1,4 @@
 #include "LinkedListTest.h"
-#include "../DynamicCollections/BaseContainer/LinkedList.h"
 
 #include <assert.h>
 
@@ -80,10 +79,15 @@ void LinkedListRemoveAllElementsTest()
 	LinkedListAddToEnd(&linkedList, &data[4]);
 	LinkedListAddToEnd(&linkedList, &data[5]);
 
+	LinkedListPrintContent(&linkedList);
 
 	LinkedListInsert(&linkedList, 2, &data[2]);
+
+	LinkedListPrintContent(&linkedList);
+
 	LinkedListInsert(&linkedList, 3, &data[3]);
 
+	LinkedListPrintContent(&linkedList);
 
 	assert(linkedList.Size == 6);
 	assert(linkedList.SizeOfSingleElement == sizeof(int));
@@ -94,15 +98,32 @@ void LinkedListRemoveAllElementsTest()
 	LinkedListGetElement(&linkedList, 1, &extractedData[1]);
 	LinkedListGetElement(&linkedList, 2, &extractedData[2]);
 	LinkedListGetElement(&linkedList, 3, &extractedData[3]);
-	//LinkedListGetElement(&linkedList, 4, &extractedData[4]);
-	//LinkedListGetElement(&linkedList, 5, &extractedData[5]);
+	LinkedListGetElement(&linkedList, 4, &extractedData[4]);
+	LinkedListGetElement(&linkedList, 5, &extractedData[5]);
 
 	assert(extractedData[0] == 10);
 	assert(extractedData[1] == 20);
 	assert(extractedData[2] == 30);
 	assert(extractedData[3] == 40);
-	//assert(extractedData[4] == 50);
-	//assert(extractedData[5] == 60);
+	assert(extractedData[4] == 50);
+	assert(extractedData[5] == 60);
 
-	//LinkedListClear(&linkedList);
+	LinkedListClear(&linkedList);
+}
+
+void LinkedListPrintContent(LinkedList* linkedList)
+{
+	LinkedListNode* linkedListNode = linkedList->FirstNode;
+	unsigned int index = 0;
+
+	printf("---[content]---\n");
+
+	while (linkedListNode)
+	{
+		printf("[%i] %p (%i) -> %p\n", ++index, linkedListNode, *(int*)linkedListNode->ElementCurrent, linkedListNode->ElementNext);
+
+		linkedListNode = linkedListNode->ElementNext;
+	}
+
+	printf("---------------\n");
 }

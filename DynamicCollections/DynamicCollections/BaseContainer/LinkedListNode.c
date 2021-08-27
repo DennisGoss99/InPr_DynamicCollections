@@ -21,8 +21,8 @@ LinkedListNode* LinkedNodeCreate(unsigned int sizeOfElement, void* dataCurrent, 
 
 	if (dataNext)
 	{
-		newNode->ElementNext = malloc(sizeOfElement);
-		memcpy(newNode->ElementNext, dataCurrent, sizeOfElement);
+		newNode->ElementNext = malloc(size);
+		memcpy(newNode->ElementNext, dataNext, size);
 	}
 
 	return newNode;
