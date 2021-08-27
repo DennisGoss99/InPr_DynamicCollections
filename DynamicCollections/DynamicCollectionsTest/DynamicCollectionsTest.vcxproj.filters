@@ -36,6 +36,9 @@
     <ClCompile Include="DictionaryTest.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="LinkedListTest.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StackTest.h">
@@ -54,6 +57,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DictionaryTest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedListTest.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "ListTest.h"
 #include "StackTest.h"
 #include "QueueTest.h"
+#include "LinkedListTest.h"
 #include "DictionaryTest.h"
 #include "TestSystem/Tester.h"
 
@@ -13,8 +14,9 @@ int main()
 
     StackTestStart();
     QueueTestStart();
+    LinkedListTestStart();
 
-    ListTestStart();
+    ListTestStart(); 
 
     DictionaryTestStart();
 	
