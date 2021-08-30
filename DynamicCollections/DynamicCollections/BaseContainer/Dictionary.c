@@ -24,6 +24,9 @@ void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsign
 
 void DictionaryDestroy(Dictionary* dictionary)
 {
+	dictionary->Size = 0;
+	dictionary->SizeOfKey = 0;
+	dictionary->SizeOfValue = 0;
 	//Todo: free
 }
 
@@ -63,12 +66,13 @@ CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value)
 		if (!Root)
 			return CollectionOutOfMemory;
 
+		Root->Key = calloc(1, dictionary->SizeOfKey);
+		
 		Root->Key = key;
 		Root->Value = value;
-
-		dictionary->Size++;
 		
-	}else
+	}
+	else
 	{
 
 		int compareKeyValue = memcmp(Root->Key, key, dictionary->SizeOfKey); 
@@ -78,6 +82,11 @@ CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value)
 
 
 		DictionaryTreeItem* insertItem = calloc(1, sizeof(DictionaryTreeItem));
+		insertItem->Key = calloc(1, dictionary->SizeOfKey);
+
+		if (!insertItem->Key)
+			return CollectionOutOfMemory;
+		
 		insertItem->Key = key;
 		insertItem->Value = value;
 
@@ -134,8 +143,105 @@ CollectionError DictionaryGet(Dictionary* dictionary, void* key, void* out)
 	return CollectionNoError;
 }
 
-CollectionError DictionaryRemove(Dictionary* dictionary)
+CollectionError DictionaryRemove(Dictionary* dictionary, void* key)
 {
-	//Todo: free
-	return CollectionNoError;
+	if (dictionary->Size == 0)
+		return CollectionEmpty;
+
+	DictionaryTreeItem* currentItemParent = NULL;
+	char side = 0;
+	
+	DictionaryTreeItem* currentItem = Root;
+	
+	int compareKeyValue = memcmp(currentItem->Key, key, dictionary->SizeOfKey);
+
+	while (compareKeyValue != 0){
+		
+		currentItemParent = currentItem;
+		side = compareKeyValue > 0 ? 1 : 2;
+		
+		currentItem = compareKeyValue > 0 ? currentItem->LeftChild : currentItem->RightChild;
+
+		if (currentItem == NULL)
+			return CollectionElementIsNullPointer;
+
+		compareKeyValue = memcmp(currentItem->Key, key, dictionary->SizeOfKey);
+	}
+
+	//has no Children
+	if(currentItem->LeftChild == NULL && currentItem->RightChild == NULL)
+	{
+		free(currentItem);
+
+		if (side == 0)
+			Root = NULL;
+		if (side == 1)
+			currentItemParent->LeftChild = NULL;
+		if (side == 2)
+			currentItemParent->RightChild = NULL;
+
+		dictionary->Size--;
+		
+		return CollectionNoError;
+	}
+
+	//has one Child
+	if(currentItem->LeftChild == NULL || currentItem->RightChild == NULL)
+	{
+		DictionaryTreeItem* child = currentItem->LeftChild == NULL ? currentItem->RightChild : currentItem->LeftChild;
+
+		free(currentItem);
+
+		if (side == 0)
+			Root = child;
+		if (side == 1)
+			currentItemParent->LeftChild = child;
+		if (side == 2)
+			currentItemParent->RightChild = child;
+
+		dictionary->Size--;
+		return CollectionNoError;
+	}
+
+	//has two Children
+	{
+		DictionaryTreeItem* currentItemRightChild = currentItem->RightChild;
+		
+		DictionaryTreeItem* biggestLowestChild = currentItem->RightChild;
+		DictionaryTreeItem* biggestLowestChildParent = currentItem;
+
+		while (biggestLowestChild->LeftChild != NULL)
+		{
+			biggestLowestChildParent = biggestLowestChild;
+			biggestLowestChild = biggestLowestChild->LeftChild;
+		}
+
+		
+		biggestLowestChild->LeftChild = currentItem->LeftChild;
+		biggestLowestChildParent->LeftChild = NULL;
+		
+		free(currentItem);
+
+		if (side == 0)
+			Root = biggestLowestChild;
+		if (side == 1)
+			currentItemParent->LeftChild = biggestLowestChild;
+		if (side == 2)
+			currentItemParent->RightChild = biggestLowestChild;
+
+
+		DictionaryTreeItem* rightBranchBiggestLowestChild = biggestLowestChild;
+		
+		while (rightBranchBiggestLowestChild->RightChild != NULL)
+		{
+			rightBranchBiggestLowestChild = rightBranchBiggestLowestChild->RightChild;
+		}
+
+		if(rightBranchBiggestLowestChild != currentItemRightChild)
+			rightBranchBiggestLowestChild->RightChild = currentItemRightChild;
+		
+
+		dictionary->Size--;
+		return CollectionNoError;
+	}	
 }

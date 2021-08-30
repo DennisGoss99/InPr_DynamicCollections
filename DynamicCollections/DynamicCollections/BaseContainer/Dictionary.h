@@ -16,6 +16,6 @@ char DictionaryContainsKey(Dictionary* dictionary, void* key);
 
 CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value); 
 CollectionError DictionaryGet(Dictionary* dictionary, void* key, void* out);
-CollectionError DictionaryRemove(Dictionary* dictionary);
+CollectionError DictionaryRemove(Dictionary* dictionary, void* key);
 
 #endif
