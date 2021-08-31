@@ -22,7 +22,7 @@ void DictionaryTestStart()
 }
 
 void DictionaryTests() {
-
+	
 	{
 		Dictionary test;
 
@@ -61,6 +61,7 @@ void DictionaryTests() {
 	
 		DictionaryDestroy(&test);
 	}
+	
 
 	{
 		Dictionary test;
@@ -108,7 +109,7 @@ void DictionaryTests() {
 		test_collectionError(CollectionNoError, DictionaryRemove(&test, &testInt6), "Dictionary Remove Test 6");
 
 		test_collectionError(CollectionNoError, DictionaryRemove(&test, &testInt1), "Dictionary Remove Test 7");
-		
+
 		test_collectionError(CollectionArrayIndexOutOfBounds, DictionaryGet(&test, &testInt1, &outputAddress), "Dictionary Remove Test 8");
 
 		test_collectionError(CollectionNoError, DictionaryRemove(&test, &testInt2), "Dictionary Remove Test 8");
@@ -121,6 +122,7 @@ void DictionaryTests() {
 		DictionaryRemove(&test, &testInt8);
 
 		test_int(0, test.Size, "Dictionary Remove Test 9");
+
+		DictionaryDestroy(&test);
 	}
-	
 }

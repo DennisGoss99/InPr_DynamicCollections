@@ -4,16 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct DictionaryTreeItem_
-{
-	void* Key;
-	void* Value;
 
-	struct DictionaryTreeItem_* LeftChild;
-	struct DictionaryTreeItem_* RightChild;
-}DictionaryTreeItem;
 
-static DictionaryTreeItem* Root;
+
 
 void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsigned int sizeOfValue)
 {
@@ -22,13 +15,33 @@ void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsign
 	dictionary->SizeOfValue = sizeOfValue;
 }
 
+static void DeleteNode(DictionaryTreeItem* deleteNode)
+{
+	if (deleteNode->LeftChild != NULL)
+		DeleteNode(deleteNode->LeftChild);
+	
+	if (deleteNode->RightChild != NULL)
+		DeleteNode(deleteNode->RightChild);
+
+	free(deleteNode->Key);
+	free(deleteNode);
+}
+
 void DictionaryDestroy(Dictionary* dictionary)
 {
 	dictionary->Size = 0;
 	dictionary->SizeOfKey = 0;
 	dictionary->SizeOfValue = 0;
-	//Todo: free
+
+	DictionaryTreeItem* destroyItem = dictionary->Root;
+
+	if (dictionary->Root != NULL)
+		DeleteNode(dictionary->Root);
+
+	dictionary->Root = NULL;
 }
+
+
 
 char DictionaryContainsKey(Dictionary* dictionary, void* key)
 {
@@ -36,7 +49,7 @@ char DictionaryContainsKey(Dictionary* dictionary, void* key)
 		return 0;
 
 	int compareKeyValue;
-	DictionaryTreeItem* currentElement = Root;
+	DictionaryTreeItem* currentElement = dictionary->Root;
 
 	do {
 		compareKeyValue = memcmp(currentElement->Key, key, dictionary->SizeOfKey);
@@ -61,21 +74,25 @@ CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value)
 	// no root exists
 	if (dictionary->Size == 0)
 	{
-		Root = calloc(1, sizeof(DictionaryTreeItem));
+		dictionary->Root = calloc(1, sizeof(DictionaryTreeItem));
 		
-		if (!Root)
+		if (!dictionary->Root)
 			return CollectionOutOfMemory;
 
-		Root->Key = calloc(1, dictionary->SizeOfKey);
+		dictionary->Root->Key = calloc(1, dictionary->SizeOfKey);
+
+		if (!dictionary->Root->Key)
+			return CollectionOutOfMemory;
+
+		memcpy(dictionary->Root->Key, key, dictionary->SizeOfKey);
 		
-		Root->Key = key;
-		Root->Value = value;
+		dictionary->Root->Value = value;
 		
 	}
 	else
 	{
 
-		int compareKeyValue = memcmp(Root->Key, key, dictionary->SizeOfKey); 
+		int compareKeyValue = memcmp(dictionary->Root->Key, key, dictionary->SizeOfKey);
 
 		if (compareKeyValue == 0)
 			return CollectionKeyAlreadyExists;
@@ -86,11 +103,11 @@ CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value)
 
 		if (!insertItem->Key)
 			return CollectionOutOfMemory;
-		
-		insertItem->Key = key;
+
+		memcpy(insertItem->Key, key, dictionary->SizeOfKey);
 		insertItem->Value = value;
 
-		DictionaryTreeItem* insertItemParent = Root;
+		DictionaryTreeItem* insertItemParent = dictionary->Root;
 		
 		while((compareKeyValue > 0 ? insertItemParent->LeftChild : insertItemParent->RightChild) != NULL)
 		{
@@ -119,7 +136,7 @@ CollectionError DictionaryGet(Dictionary* dictionary, void* key, void* out)
 		return CollectionEmpty;
 	
 	int compareKeyValue;
-	DictionaryTreeItem* currentElement = Root;
+	DictionaryTreeItem* currentElement = dictionary->Root;
 	
 	do {
 		compareKeyValue = memcmp(currentElement->Key, key, dictionary->SizeOfKey);
@@ -151,7 +168,7 @@ CollectionError DictionaryRemove(Dictionary* dictionary, void* key)
 	DictionaryTreeItem* currentItemParent = NULL;
 	char side = 0;
 	
-	DictionaryTreeItem* currentItem = Root;
+	DictionaryTreeItem* currentItem = dictionary->Root;
 	
 	int compareKeyValue = memcmp(currentItem->Key, key, dictionary->SizeOfKey);
 
@@ -171,10 +188,11 @@ CollectionError DictionaryRemove(Dictionary* dictionary, void* key)
 	//has no Children
 	if(currentItem->LeftChild == NULL && currentItem->RightChild == NULL)
 	{
+		free(currentItem->Key);
 		free(currentItem);
 
 		if (side == 0)
-			Root = NULL;
+			dictionary->Root = NULL;
 		if (side == 1)
 			currentItemParent->LeftChild = NULL;
 		if (side == 2)
@@ -190,10 +208,11 @@ CollectionError DictionaryRemove(Dictionary* dictionary, void* key)
 	{
 		DictionaryTreeItem* child = currentItem->LeftChild == NULL ? currentItem->RightChild : currentItem->LeftChild;
 
+		free(currentItem->Key);
 		free(currentItem);
 
 		if (side == 0)
-			Root = child;
+			dictionary->Root = child;
 		if (side == 1)
 			currentItemParent->LeftChild = child;
 		if (side == 2)
@@ -219,11 +238,12 @@ CollectionError DictionaryRemove(Dictionary* dictionary, void* key)
 		
 		biggestLowestChild->LeftChild = currentItem->LeftChild;
 		biggestLowestChildParent->LeftChild = NULL;
-		
+
+		free(currentItem->Key);
 		free(currentItem);
 
 		if (side == 0)
-			Root = biggestLowestChild;
+			dictionary->Root = biggestLowestChild;
 		if (side == 1)
 			currentItemParent->LeftChild = biggestLowestChild;
 		if (side == 2)
