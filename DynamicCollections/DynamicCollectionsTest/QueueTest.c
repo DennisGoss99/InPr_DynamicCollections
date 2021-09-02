@@ -18,7 +18,7 @@ void QueueComplexTest()
 
 	// Add
 	{
-		char a[] = "ABCDE";
+		char a[6] = "ABCDE";
 		QueuePush(&queue, &a[0]);
 		QueuePush(&queue, &a[1]);
 		QueuePush(&queue, &a[2]);

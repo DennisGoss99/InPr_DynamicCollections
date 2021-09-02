@@ -1,4 +1,5 @@
 #include "LinkedListNode.h"
+#include <stdlib.h>
 
 void LinkedNodeInitialize(LinkedListNode* linkedListNode)
 {

@@ -22,7 +22,7 @@ void StackClear(Stack* stack)
 CollectionError StackPush(Stack* stack, void* element)
 {
 	unsigned int sizeOfElement = stack->SizeOfSingleElement;
-	unsigned int dataSizeCurrent = stack->SizeUsed;
+	size_t dataSizeCurrent = stack->SizeUsed;
 	unsigned int dataSizeNew = (dataSizeCurrent + 1);
 	char needToReallocate = dataSizeNew >= stack->SizeAllocated;
 	void* dataCurrent = stack->Content;
@@ -56,7 +56,7 @@ CollectionError StackPush(Stack* stack, void* element)
 	}
 
 	dataNew = stack->Content;
-	dataInsertionPoint = (unsigned int)dataNew + dataSizeCurrent;
+	dataInsertionPoint = (size_t)dataNew + dataSizeCurrent;
 
 	memcpy(dataInsertionPoint, element, sizeOfElement);
 
@@ -86,7 +86,7 @@ CollectionError StackPull(Stack* stack, void* element)
 	}
 
 	// Extract data before reallocation
-	dataExtractionPoint = (unsigned int)dataCurrent + dataSizeCurrent - 1u;
+	dataExtractionPoint = (size_t)dataCurrent + dataSizeCurrent - 1u;
 
 	memcpy(element, dataExtractionPoint, sizeOfElement);
 

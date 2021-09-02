@@ -1,4 +1,6 @@
 #include "Queue.h"
+#include <stddef.h>
+#include <stdlib.h>
 
 void QueueInitialize(Queue* queue, unsigned int sizeOfSingleElement)
 {
@@ -44,7 +46,7 @@ CollectionError QueuePush(Queue* queue, void* element)
 		unsigned int allocateSpace = dataSizeCurrent + QueueThreshold;
 		unsigned int allocateSpaceInBytes = allocateSpace * sizeOfElement;
 
-		dataNew = realloc(dataCurrent, allocateSpaceInBytes);
+		dataNew = realloc(dataCurrent, allocateSpaceInBytes);		
 
 		if (!dataNew)
 		{
@@ -56,7 +58,7 @@ CollectionError QueuePush(Queue* queue, void* element)
 	}
 
 	dataNew = queue->Content;
-	dataInsertionPoint = (unsigned int)dataNew + dataSizeCurrent;
+	dataInsertionPoint = (size_t)dataNew + dataSizeCurrent;
 
 	memcpy(dataInsertionPoint, element, sizeOfElement);
 
@@ -86,7 +88,7 @@ CollectionError QueuePull(Queue* queue, void* element)
 	}
 
 	// Extract data before reallocation
-	dataExtractionPoint = (unsigned int)dataCurrent + queue->DataOffset;
+	dataExtractionPoint = (size_t)dataCurrent + queue->DataOffset;
 
 	memcpy(element, dataExtractionPoint, sizeOfElement);
 
