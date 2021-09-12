@@ -5,7 +5,7 @@
 
 void LinkedListTestStart();
 static void LinkedListAddElementTest();
-static void LinkedListAddMultibleElementsTest();
+static void LinkedListAddMultipleElementsTest();
 static void LinkedListRemoveAllElementsTest();
 static void LinkedListPrintContent(LinkedList* linkedList);
 

@@ -1,6 +1,7 @@
 #include "StackTest.h"
 #include "../DynamicCollections/BaseContainer/Stack.h"
 #include "TestSystem/Tester.h"
+#include "TestSystem/CollectionTester.h"
 
 #include <assert.h>
 
@@ -22,7 +23,7 @@ void StackAddElementTest()
 
 	const CollectionError error = StackPush(&stack, &a);
 
-	test_collectionError(error, CollectionNoError, "Stack Test: Push int value");
+	test_collectionError(CollectionNoError, error, "Stack Test: Push int value");
 }
 
 void StackRemoveNothingTest()
@@ -34,7 +35,7 @@ void StackRemoveNothingTest()
 
 	const CollectionError error = StackPull(&stack, &dummy);
 
-	test_collectionError(error, CollectionEmpty, "Stack Test: Pull empty stack");
+	test_collectionError(CollectionEmpty, error, "Stack Test: Pull empty stack");
 }
 
 void StackAddAndRemoveTest()
@@ -68,6 +69,7 @@ void StackComplexTest()
 	// Add
 	{
 		char a[] = "Hello";
+		
 		StackPush(&stack, &a[0]);
 		StackPush(&stack, &a[1]);
 		StackPush(&stack, &a[2]);
@@ -95,8 +97,8 @@ void StackComplexTest()
 
 	// Empty
 	collectionError = StackPull(&stack, &x);
-	assert(collectionError == CollectionEmpty);
-
+	test_collectionError(CollectionEmpty, collectionError, "Stack complex Test: empty Stack ");
+	
 	// Add
 	{
 		char b[] = "123";
@@ -118,5 +120,5 @@ void StackComplexTest()
 	}
 
 	collectionError = StackPull(&stack, &x);
-	assert(collectionError == CollectionEmpty);
+	test_collectionError(CollectionEmpty, collectionError, "Stack complex Test: empty Stack ");
 }

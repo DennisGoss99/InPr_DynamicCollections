@@ -4,8 +4,12 @@
 
 #include <assert.h>
 
+#include "TestSystem/Tester.h"
+#include "TestSystem/CollectionTester.h"
+
 void QueueTestStart()
 {
+	testPrintHeader("-----<Testing Queue.h>-----");
 	QueueComplexTest();
 }
 
@@ -19,7 +23,8 @@ void QueueComplexTest()
 	// Add
 	{
 		char a[6] = "ABCDE";
-		QueuePush(&queue, &a[0]);
+		collectionError = QueuePush(&queue, &a[0]);
+		test_collectionError(CollectionNoError, collectionError, "Queue Test: Push");
 		QueuePush(&queue, &a[1]);
 		QueuePush(&queue, &a[2]);
 		QueuePush(&queue, &a[3]);
@@ -29,7 +34,7 @@ void QueueComplexTest()
 	// Pull
 	{
 		QueuePull(&queue, &x);
-		assert(x == 'A');
+		test_int('A', x, "Queue Test: Pull 1");
 
 		QueuePull(&queue, &x);
 		assert(x == 'B');
@@ -46,8 +51,8 @@ void QueueComplexTest()
 
 	// Empty
 	collectionError = QueuePull(&queue, &x);
-	assert(collectionError == CollectionEmpty);
-
+	test_collectionError(CollectionEmpty, collectionError, "Queue complex Test: empty Stack ");
+	
 	// Add
 	{
 		char b[] = "123";
@@ -59,7 +64,7 @@ void QueueComplexTest()
 	// Pull
 	{
 		QueuePull(&queue, &x);
-		assert(x == '1');
+		test_int('1', x, "Queue Test: Pull 2");
 
 		QueuePull(&queue, &x);
 		assert(x == '2');
@@ -69,5 +74,5 @@ void QueueComplexTest()
 	}
 
 	collectionError = QueuePull(&queue, &x);
-	assert(collectionError == CollectionEmpty);
+	test_collectionError(CollectionEmpty, collectionError, "Queue complex Test: empty Stack ");
 }
