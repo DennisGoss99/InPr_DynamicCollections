@@ -1,6 +1,6 @@
 #---<TEST-System>--------------------------------------------------------------
-DynamicCollectionsTest.run: DynamicCollectionsTest.o  Tester.o CollectionTester.o DictionaryTest.o LinkedListTest.o ListTest.o QueueTest.o StackTest.o String.o GeneralContainer.lib
-	gcc -m32 bin/DynamicCollectionsTest.o bin/Tester.o bin/CollectionTester.o bin/DictionaryTest.o bin/LinkedListTest.o bin/ListTest.o bin/QueueTest.o bin/StackTest.o bin/String.o bin/GeneralContainer.lib -o DynamicCollectionsTest.run
+DynamicCollectionsTest.run: DynamicCollectionsTest.o  Tester.o CollectionTester.o DictionaryTest.o LinkedListTest.o ListTest.o QueueTest.o StackTest.o String.o StringTest.o GeneralContainer.lib
+	gcc -m32 bin/DynamicCollectionsTest.o bin/Tester.o bin/CollectionTester.o bin/DictionaryTest.o bin/LinkedListTest.o bin/ListTest.o bin/QueueTest.o bin/StackTest.o bin/String.o bin/StringTest.o bin/GeneralContainer.lib -o DynamicCollectionsTest.run
 
 
 DynamicCollectionsTest.o: DynamicCollectionsTest/DynamicCollectionsTest.c
