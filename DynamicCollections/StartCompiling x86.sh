@@ -1,5 +1,5 @@
 mkdir bin
 
-make
+make -f makefile_32.mk
 
 ./DynamicCollectionsTest.run

@@ -8,7 +8,7 @@ void StringInitialize(String* string, char* inputString)
 {
 	const size_t inputStringLength = strlen(inputString);
 
-	ListInitialize(string, inputStringLength, sizeof(char*));
+	ListInitialize(&string->list, inputStringLength, sizeof(char*));
 
 	for (int i = 0; i < inputStringLength; ++i)
 	{
@@ -19,8 +19,8 @@ void StringInitialize(String* string, char* inputString)
 void StringDestruction(String* string)
 {
 	//ListDestruction(string);
-	free(string->Content);
-	string->Content = NULL;
+	free(string->list.Content);
+	string->list.Content = NULL;
 }
 
 CollectionError StringCharInsertAt(String* string, unsigned int indexValue, char value)
@@ -28,26 +28,26 @@ CollectionError StringCharInsertAt(String* string, unsigned int indexValue, char
 	if (string == NULL)
 		return CollectionEmpty;
 
-	if (indexValue > string->Size - 1)
+	if (indexValue > string->list.Size - 1)
 		return CollectionArrayIndexOutOfBounds;
 
-	if (string->Content[indexValue] == NULL)
+	if (string->list.Content[indexValue] == NULL)
 		string->Count++;
 	
-	string->Content[indexValue] = value;
+	string->list.Content[indexValue] = value;
 
 	return CollectionNoError;
 }
 
 CollectionError StringCharGet(String* string, unsigned int index, char* out)
 {
-	return ListItemGet(string, index, out);
+	return ListItemGet(&string->list, index, out);
 }
 
 CollectionError StringCharAdd(String* string, char addChar)
 {
 	string->Count++;
-	return ListItemAdd(string, addChar);
+	return ListItemAdd(&string->list, addChar);
 }
 
 CollectionError StringConcat(String* string, char* addString)
@@ -57,7 +57,7 @@ CollectionError StringConcat(String* string, char* addString)
 
 	for (int i = 0; i < strlen(addString); ++i)
 	{
-		StringCharAdd(string, addString[i]);
+		StringCharAdd(&string->list, addString[i]);
 	}
 	
 	return CollectionNoError;
@@ -69,7 +69,7 @@ CollectionError StringGetFullString(String* string, char** out)
 
 	for (int i = 0; i < string->Count; ++i)
 	{
-		returnString[i] = string->Content[i];
+		returnString[i] = string->list.Content[i];
 	}
 	
 	memcpy(out, &returnString, sizeof(char*));

@@ -7,7 +7,7 @@
 
 typedef struct String_
 {
-	struct List_;
+	struct List_ list;
 	unsigned int Count;
 }String;
 
