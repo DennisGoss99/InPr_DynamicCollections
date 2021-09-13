@@ -49,7 +49,7 @@ void StringTests()
 	StringCharGet(&testString, 15, &outputChar);
 	test_int('T', outputChar, "String test: Get 5");
 	
-	StringGetFullString(&testString, &outputChar);
+	outputChar = StringGetFullString(&testString);
 
 	test_string("Test String!TEST", outputChar, "String test: Add Full String");
 	

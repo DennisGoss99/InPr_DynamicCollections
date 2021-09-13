@@ -8,7 +8,13 @@
 #include "CollectionError.h"
 
 
-
+/*
+ * List:
+ * --------------------
+ * Content
+ * SizeOfSingleElement
+ * Size: Number of all storage locations
+ */
 typedef struct List_
 {
 	void** Content;
@@ -31,47 +37,57 @@ void ListDestruction(List* list);
 /*
  * Function:  ListItemInsertAt
  * --------------------
- * adds parameter value to index in parameter list->Content
+ * Adds parameter value to index in parameter list->Content
  * --------------------
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionArrayIndexOutOfBounds
  */
 CollectionError ListItemInsertAt(List* list, unsigned int indexValue, void* value);
 
 /*
  * Function:  ListItemGet
  * --------------------
- * adds parameter value to index in parameter list->Content
+ * Get value at transmitted index and saves it in out
  * --------------------
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionArrayIndexOutOfBounds
  */
-CollectionError ListItemGet(List* list, unsigned int index, void* element);
+CollectionError ListItemGet(List* list, unsigned int index, void* out);
 
 /*
  * Function:  ListItemAdd
  * --------------------
- * adds parameter value to next free value in parameter list->Content
- * --------------------
+ * Adds parameter value to next free value in parameter list->Content
  *
  * When the List is full, it will be made bigger
+ * --------------------
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionOutOfMemory
  */
 CollectionError ListItemAdd(List* list, void* value);
 
 /*
  * Function:  ListItemRemove
  * --------------------
- * adds parameter value to index in parameter list->Content
+ * Removes Element at index
  * --------------------
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionArrayIndexOutOfBounds
  */
 CollectionError ListItemRemove(List* list, unsigned int index);
 
 /*
  * Function:  ListClear
  * --------------------
- * sets all values in list->Content = 0
+ * Sets all values in list->Content = 0
  * --------------------
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
  */
 CollectionError ListClear(List* list);
-
-//void ListPrint_string(List* list);
-//
-//void ListPrint_int(List* list);
 
 #endif

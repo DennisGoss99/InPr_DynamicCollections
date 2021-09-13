@@ -5,18 +5,24 @@
 
 #define EMPTYSTRING (String){0}
 
+/*
+ * String:
+ * --------------------
+ * List : inner element (contains char´s)
+ * Count: contains number of chars
+ */
 typedef struct String_
 {
-	struct List_ list;
+	struct List_ List;
 	unsigned int Count;
 }String;
 
 /*
- * Function:  PathListInitialize
+ * Function:  StringInitialize
  * --------------------
  * Acts like a constructor
- * ! A list must be set to EMPTYLIST before each initialization
- * eg: 'List a = EMPTYLIST;'
+ * ! A string must be set to EMPTYSTRING before each initialization
+ * eg: 'String a = EMPTYSTRING;'
  * --------------------
  */
 void StringInitialize(String* string, char* inputString);
@@ -24,70 +30,62 @@ void StringInitialize(String* string, char* inputString);
 void StringDestruction(String* string);
 
 /*
- * Function:  PathListItemInsertAt
+ * Function:  StringCharInsertAt
  * --------------------
- * adds parameter value to index in parameter list->content
+ * Puts char at index position
  * --------------------
- *  returns: 0 if successful
- *	  -1 List is NULL
- *	  -2 Out of bounds
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionArrayIndexOutOfBounds
  */
 CollectionError StringCharInsertAt(String* string, unsigned int indexValue, char value);
 
 /*
- * Function:  PathListItemGet
+ * Function:  StringCharGet
  * --------------------
- * adds parameter value to index in parameter list->content
+ * Get char at transmitted index and saves it in out
  * --------------------
- *  returns: Value if successful
- *	  NULL List is NULL
- *	  NULL Out of bounds
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionArrayIndexOutOfBounds
  */
 CollectionError StringCharGet(String* string, unsigned int index, char* out);
 
 /*
- * Function:  PathListItemAdd
+ * Function:  StringCharAdd
  * --------------------
- * adds parameter value to next free value in parameter list->content
+ * Adds char to the end of string
+
+ * When the string is full, it will be made bigger
  * --------------------
- *
- * When the List is full, it will be made bigger
- *
- *  returns: 0 if successful
- *	  -1 List is NULL
- *	  -2 Out of bounds
- *	  -9 Calloc failed
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionOutOfMemory
  */
 CollectionError StringCharAdd(String* string, char addChar);
 
 /*
- * Function:  PathListItemAdd
+ * Function:  StringConcat
  * --------------------
- * adds parameter value to next free value in parameter list->content
+ * Adds the transmitted string to the end
  * --------------------
  *
- * When the List is full, it will be made bigger
- *
- *  returns: 0 if successful
- *	  -1 List is NULL
- *	  -2 Out of bounds
- *	  -9 Calloc failed
+ *  returns: CollectionNoError
+ *	   CollectionEmpty
+ *	   CollectionOutOfMemory
  */
 CollectionError StringConcat(String* string, char* addString);
 
 /*
- * Function:  PathListItemAdd
+ * Function:  StringGetFullString
  * --------------------
- * adds parameter value to next free value in parameter list->content
+ * Returns string object as normal string
+ *
+ * Returned string must be freed!
  * --------------------
  *
- * When the List is full, it will be made bigger
- *
- *  returns: 0 if successful
- *	  -1 List is NULL
- *	  -2 Out of bounds
- *	  -9 Calloc failed
+ *  returns: string
  */
-CollectionError StringGetFullString(String* string, char** out);
+char* StringGetFullString(String* string);
 
 #endif

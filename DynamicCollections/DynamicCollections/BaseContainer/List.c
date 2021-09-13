@@ -51,30 +51,30 @@ CollectionError ListItemInsertAt(List* list, unsigned int indexValue, void* valu
 	return CollectionNoError;
 }
 
-CollectionError ListItemGet(List* list, unsigned int index, void* element)
+CollectionError ListItemGet(List* list, unsigned int index, void* out)
 {
 	if (index > list->Size - 1)
 	{
 		void* null = NULL;
-		memcpy(element, &null, sizeof(void*));
+		memcpy(out, &null, sizeof(void*));
 		return CollectionArrayIndexOutOfBounds;
 	}
 
 	if (list == NULL)
 	{
 		void* null = NULL;
-		memcpy(element, &null, sizeof(void*));
+		memcpy(out, &null, sizeof(void*));
 		return CollectionEmpty;
 	}
 
 	if(list->Content[index] == NULL)
 	{
 		int null = NULL;
-		memcpy(element, &null, sizeof(void*) * 2);
+		memcpy(out, &null, sizeof(void*) * 2);
 		return CollectionNoError;
 	}
 	
-	memcpy(element, &list->Content[index], sizeof(void*));
+	memcpy(out, &list->Content[index], sizeof(void*));
 
 	return CollectionNoError;
 }
@@ -142,29 +142,3 @@ CollectionError ListClear(List* list)
 
 	return CollectionNoError;
 }
-
-//void ListPrint_string(List* list)
-//{
-//	printf("{");
-//	for (int i = 0; i < list->Size; ++i)
-//	{
-//		if (i != 0)
-//			printf(",");
-//
-//		printf("%s", ListItemGet(list, i));
-//	}
-//	printf("}");
-//}
-//
-//void ListPrint_int(List* list)
-//{
-//	printf("{");
-//	for (int i = 0; i < list->Size; ++i)
-//	{
-//		if (i != 0)
-//			printf(",");
-//
-//		printf("%i", ListItemGet(list, i));
-//	}
-//	printf("}");
-//}

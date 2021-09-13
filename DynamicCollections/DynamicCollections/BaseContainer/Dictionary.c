@@ -71,6 +71,9 @@ char DictionaryContainsKey(Dictionary* dictionary, void* key)
 
 CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value)
 {
+	if (dictionary == NULL)
+		return CollectionEmpty;
+	
 	// no root exists
 	if (dictionary->Size == 0)
 	{
