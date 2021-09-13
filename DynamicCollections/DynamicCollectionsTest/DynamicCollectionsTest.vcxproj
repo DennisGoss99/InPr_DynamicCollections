@@ -151,6 +151,7 @@
     <ClCompile Include="LinkedListTest.c" />
     <ClCompile Include="ListTest.c" />
     <ClCompile Include="QueueTest.c" />
+    <ClCompile Include="StringTest.c" />
     <ClCompile Include="TestSystem\CollectionTester.c" />
     <ClCompile Include="DynamicCollectionsTest.c" />
     <ClCompile Include="StackTest.c" />
@@ -166,6 +167,7 @@
     <ClInclude Include="LinkedListTest.h" />
     <ClInclude Include="ListTest.h" />
     <ClInclude Include="QueueTest.h" />
+    <ClInclude Include="StringTest.h" />
     <ClInclude Include="TestSystem\CollectionTester.h" />
     <ClInclude Include="StackTest.h" />
     <ClInclude Include="TestSystem\Tester.h" />

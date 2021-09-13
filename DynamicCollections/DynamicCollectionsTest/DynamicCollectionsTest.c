@@ -5,6 +5,7 @@
 #include "QueueTest.h"
 #include "LinkedListTest.h"
 #include "DictionaryTest.h"
+#include "StringTest.h"
 #include "TestSystem/Tester.h"
 
 
@@ -19,6 +20,8 @@ int main()
     ListTestStart(); 
 
     DictionaryTestStart();
+
+    StringTestStart();
 	
     testPrintSummery();
     
