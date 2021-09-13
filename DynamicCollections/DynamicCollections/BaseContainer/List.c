@@ -4,7 +4,7 @@
 #include <string.h>
 
 
-void ListInitialize(List* list, unsigned int count, unsigned int sizeOfSingleElement)
+void ListInitialize(List* list, unsigned int count, size_t sizeOfSingleElement)
 {
 	if (list->Content != NULL || list->SizeOfSingleElement != 0)
 		return;
@@ -55,14 +55,14 @@ CollectionError ListItemGet(List* list, unsigned int index, void* element)
 {
 	if (index > list->Size - 1)
 	{
-		int null = NULL;
+		void* null = NULL;
 		memcpy(element, &null, sizeof(void*));
 		return CollectionArrayIndexOutOfBounds;
 	}
 
 	if (list == NULL)
 	{
-		int null = NULL;
+		void* null = NULL;
 		memcpy(element, &null, sizeof(void*));
 		return CollectionEmpty;
 	}
@@ -70,7 +70,7 @@ CollectionError ListItemGet(List* list, unsigned int index, void* element)
 	if(list->Content[index] == NULL)
 	{
 		int null = NULL;
-		memcpy(element, &null, sizeof(void*));
+		memcpy(element, &null, sizeof(void*) * 2);
 		return CollectionNoError;
 	}
 	

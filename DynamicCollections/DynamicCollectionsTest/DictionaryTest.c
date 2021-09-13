@@ -80,7 +80,7 @@ void DictionaryTests() {
 		int testInt10 = 20;
 		int testInt11 = 7;
 
-		int outputAddress;
+		size_t outputAddress;
 
 		DictionaryAdd(&test, &testInt1, 10);
 		DictionaryAdd(&test, &testInt2, 19);

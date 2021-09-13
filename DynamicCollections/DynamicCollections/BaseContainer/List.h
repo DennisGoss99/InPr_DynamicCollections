@@ -3,6 +3,8 @@
 
 #define EMPTYLIST (List){0}
 
+#include <stddef.h>
+
 #include "CollectionError.h"
 
 
@@ -10,7 +12,7 @@
 typedef struct List_
 {
 	void** Content;
-	unsigned int SizeOfSingleElement;
+	size_t SizeOfSingleElement;
 	unsigned int Size;
 }List;
 
@@ -22,7 +24,7 @@ typedef struct List_
  * eg: 'List a = EMPTYLIST;'
  * --------------------
  */
-void ListInitialize(List* list, unsigned int count, unsigned int sizeOfSingleElement);
+void ListInitialize(List* list, unsigned int count, size_t sizeOfSingleElement);
 
 void ListDestruction(List* list);
 

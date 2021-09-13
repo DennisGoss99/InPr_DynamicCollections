@@ -63,17 +63,17 @@ void ListTests()
 
 	
 	// Test: 2 [int]
-	ListInitialize(&b, 2, sizeof(int));
+	ListInitialize(&b, 2, sizeof(int*));
 
 	int* outputInt;
 	
-	int* testInt1 = calloc(1, sizeof(int));
+	int* testInt1 = calloc(1, sizeof(int*));
 	*testInt1 = 12321;
 
-	int* testInt2 = calloc(1, sizeof(int));
+	int* testInt2 = calloc(1, sizeof(int*));
 	*testInt2 = 5;
 
-	int* testInt3 = calloc(1, sizeof(int));
+	int* testInt3 = calloc(1, sizeof(int*));
 	*testInt3 = 54;
 
 	ListItemAdd(&b, testInt1);
