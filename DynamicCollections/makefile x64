@@ -1,6 +1,6 @@
 #---<TEST-System>--------------------------------------------------------------
 DynamicCollectionsTest.run: DynamicCollectionsTest.o  Tester.o CollectionTester.o DictionaryTest.o LinkedListTest.o ListTest.o QueueTest.o StackTest.o GeneralContainer.lib
-	gcc bin/DynamicCollectionsTest.o bin/Tester.o bin/CollectionTester.o bin/DictionaryTest.o bin/LinkedListTest.o bin/ListTest.o bin/QueueTest.o bin/StackTest.o bin/GeneralContainer.lib -o DynamicCollectionsTest.run
+	gcc bin/DynamicCollectionsTest.o bin/Tester.o bin/CollectionTester.o bin/DictionaryTest.o bin/LinkedListTest.o bin/ListTest.o bin/QueueTest.o bin/StackTest.o bin/String.o bin/GeneralContainer.lib -o DynamicCollectionsTest.run
 
 
 DynamicCollectionsTest.o: DynamicCollectionsTest/DynamicCollectionsTest.c
@@ -28,6 +28,9 @@ QueueTest.o: DynamicCollectionsTest/QueueTest.c
 
 StackTest.o: DynamicCollectionsTest/StackTest.c
 	gcc -c DynamicCollectionsTest/StackTest.c  -o bin/StackTest.o
+	
+StringTest.o: DynamicCollectionsTest/StringTest.c
+	gcc -c DynamicCollectionsTest/StringTest.c  -o bin/StringTest.o
 
 
 #---<General Container>--------------------------------------------------------
@@ -56,5 +59,6 @@ Stack.o: DynamicCollections/BaseContainer/Stack.c
 	gcc -c DynamicCollections/BaseContainer/Stack.c  -o bin/Stack.o
 #------------------------------------------------------------------------------
 
-
+String.o: DynamicCollections/GeneralContainer/String.c
+	gcc -c DynamicCollections/GeneralContainer/String.c  -o bin/String.o
 
