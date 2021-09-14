@@ -24,10 +24,8 @@ const char* CollectionErrorToString(CollectionError collectionError)
 		case CollectionElementIsNullPointer:
 			return "Collection: Element is NullPointer";
 		
-		//Dictionary specific
 		case CollectionKeyAlreadyExists:
-			return "Collection: Key already exists";
-			
+			return "Collection: Key already exists";			
 			
 		default: 
 			return "Unknown CollectionError";

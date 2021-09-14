@@ -1,6 +1,5 @@
 #include "Stack.h"
-#include <malloc.h>
-#include <string.h>
+#include <stdlib.h>
 
 void StackInitialize(Stack* stack, unsigned int sizeOfSingleElement)
 {
@@ -87,9 +86,9 @@ CollectionError StackPull(Stack* stack, void* element)
 
 	// Extract data before reallocation
 	dataExtractionPoint = (size_t)dataCurrent + dataSizeCurrent - 1u;
-
 	memcpy(element, dataExtractionPoint, sizeOfElement);
 
+	// if only one element is remaining, you can clear the container.
 	if (dataSizeCurrent == 1)
 	{
 		StackClear(stack);

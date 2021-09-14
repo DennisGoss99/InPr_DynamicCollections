@@ -1,12 +1,7 @@
 #include "Dictionary.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
-
-
 
 void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsigned int sizeOfValue)
 {

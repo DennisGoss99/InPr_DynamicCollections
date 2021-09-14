@@ -1,11 +1,9 @@
 #include "LinkedList.h"
-#include <malloc.h>
-#include <memory.h>
+#include <stdlib.h>
 
 void LinkedListInitialize(LinkedList* linkedList, unsigned int sizeOfElement)
 {
-	LinkedNodeInitialize(&linkedList->FirstNode);
-
+	linkedList->FirstNode = 0;
 	linkedList->SizeOfSingleElement = sizeOfElement;
 	linkedList->Size = 0;
 }

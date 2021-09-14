@@ -7,24 +7,26 @@ void LinkedNodeInitialize(LinkedListNode* linkedListNode)
 	linkedListNode->ElementNext = 0;
 }
 
-LinkedListNode* LinkedNodeCreate(unsigned int sizeOfElement, void* dataCurrent, void* dataNext)
+LinkedListNode* LinkedNodeCreate(unsigned int sizeOfElement, void* data, LinkedListNode* nextNode)
 {
-	const unsigned int size = sizeof(LinkedListNode);
-	LinkedListNode* newNode = (LinkedListNode*)malloc(size);
+	const unsigned int linkedListNodeSize = sizeof(LinkedListNode);
+	LinkedListNode* newNode = (LinkedListNode*)malloc(linkedListNodeSize);
+
+	if (!newNode)
+	{
+		return 0; // Creation failed!
+	}
 
 	LinkedNodeInitialize(newNode);
 
-	if (dataCurrent)
+	// Copy data from source to safe in container
+	if (data)
 	{
 		newNode->ElementCurrent = malloc(sizeOfElement);
-		memcpy(newNode->ElementCurrent, dataCurrent, sizeOfElement);
+		memcpy(newNode->ElementCurrent, data, sizeOfElement);
 	}
 
-	if (dataNext)
-	{
-		newNode->ElementNext = malloc(size);
-		memcpy(newNode->ElementNext, dataNext, size);
-	}
+	newNode->ElementNext = nextNode;
 
 	return newNode;
 }

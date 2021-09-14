@@ -1,5 +1,4 @@
 #include "Queue.h"
-#include <stddef.h>
 #include <stdlib.h>
 
 void QueueInitialize(Queue* queue, unsigned int sizeOfSingleElement)
@@ -89,9 +88,9 @@ CollectionError QueuePull(Queue* queue, void* element)
 
 	// Extract data before reallocation
 	dataExtractionPoint = (size_t)dataCurrent + queue->DataOffset;
-
 	memcpy(element, dataExtractionPoint, sizeOfElement);
 
+	// if only one element is remaining, you can clear the container.
 	if (dataSizeCurrent == 1)
 	{
 		QueueClear(queue);
