@@ -14,7 +14,7 @@ Basic containers are often integrated into the language as they get used alot.
 - Queue
 - List
 - LinkedList
-- ...
+- Dictionary
 
 ## Gerneral Containers
 Then we have more general containers that have more specific uses. Still they are often integrated into languages.
