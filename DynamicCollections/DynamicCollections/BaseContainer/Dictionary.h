@@ -30,34 +30,31 @@ typedef struct Dictionary_
 	DictionaryTreeItem* Root;
 }Dictionary;
 
-/*
- * Function:  DictionaryInitialize
- * --------------------
- * Acts like a constructor
- * ! Dictionaries must be set to EMPTYDICTIONARY before each initialization
- * eg: 'List a = EMPTYDICTIONARY;'
- * --------------------
- */
+
+// Acts like a constructor
+// Dictionaries must be set to EMPTYDICTIONARY before each initialization
+// eg: 'List a = EMPTYDICTIONARY;'
+// @param dictionary: Address of dictionary object
+// @param sizeOfKey: Size of used key objects in bytes [sizeof(Type)]
+// @param sizeOfValue: Size of used value objects in bytes [sizeof(Type)]
 void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsigned int sizeOfValue);
 
+// Frees all entries keys of this dictionary
+// @param dictionary: Address of dictionary object
 void DictionaryDestroy(Dictionary* dictionary);
 
-/*
- * Function:  DictionaryContainsKey
- * --------------------
- * Returns true if the dictionary contains the transmitted key
- * --------------------
- *  returns: 0 (false)
- *	   1 (true)
- */
+// Returns true if the dictionary contains the transmitted key
+// @param dictionary: Address of Dictionary object
+// @param key: will be compared
+// @return char: 0 false/ 1 true
 char DictionaryContainsKey(Dictionary* dictionary, void* key);
 
-/*
- * Function:  DictionaryAdd
- * --------------------
- * Adds parameter value to the internal binary tree
- *
- * --------------------
+// Adds parameter value to the internal binary tree, if it doesn't contain this key
+// @param dictionary: Address of dictionary object
+// @param key: will be added
+// @param value: will be added
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
  *  returns: CollectionNoError
  *	   CollectionEmpty
  *	   CollectionOutOfMemory
@@ -65,24 +62,26 @@ char DictionaryContainsKey(Dictionary* dictionary, void* key);
  */
 CollectionError DictionaryAdd(Dictionary* dictionary, void* key, void* value);
 
-/*
- * Function:  DictionaryGet
- * --------------------
- * Gets the value of the corresponding key and safes it in out
- *
- * --------------------
+
+
+// Gets the value of the corresponding key and returns it in 'out'
+// @param dictionary: Address of dictionary object
+// @param key: will be added
+// @param out: contains the output
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
  *  returns: CollectionNoError
  *	   CollectionEmpty
  *	   CollectionArrayIndexOutOfBounds
  */
 CollectionError DictionaryGet(Dictionary* dictionary, void* key, void* out);
 
-/*
- * Function:  DictionaryRemove
- * --------------------
- * Deletes entry of key
- *
- * --------------------
+
+// Deletes entry of key
+// @param dictionary: Address of dictionary object
+// @param key: that will be removed
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
  *  returns: CollectionNoError
  *	   CollectionEmpty
  *	   CollectionElementIsNullPointer

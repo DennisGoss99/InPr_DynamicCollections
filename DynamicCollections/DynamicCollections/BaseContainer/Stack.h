@@ -23,28 +23,28 @@ typedef struct Stack_
 }Stack;
 
 // Initialize the Container. Call this directly after creation.
-// @param stack: Adress of stack object
+// @param stack: Address of stack object
 // @param sizeOfSingleElement: Size of used objects in bytes [sizeof(Type)]
 void StackInitialize(Stack* stack, unsigned int sizeOfSingleElement);
 
 // Frees all used resources form the stack and resets everything. 
 // SizeOfSingleElement is preserved. You don't need to call 'StackInitialize()' again.
-// @param stack: Adress of stack object
+// @param stack: Address of stack object
 void StackClear(Stack* stack);
 
 // Add something to the Container.
 // Data will be put after the last data.
-// @param stack: Adress of stack object
-// @param element: Adress of the data that will be added.
-// @return CollectionError: Errorcode that contains information about the opertaion.
+// @param stack: Address of stack object
+// @param element: Address of the data that will be added.
+// @return CollectionError: Errorcode that contains information about the operation.
 CollectionError StackPush(Stack* stack, void* element);
 
 // Retrieve something to the Container.
 // Data will be pulled from the last position.
 // The next element to be pulled will be the one before this.
-// @param stack: Adress of stack object
-// @param element: Adress of the destination where data will be copyed to.
-// @return CollectionError: Errorcode that contains information about the opertaion.
+// @param stack: Address of stack object
+// @param element: Address of the destination where data will be copied to.
+// @return CollectionError: Errorcode that contains information about the operation.
 CollectionError StackPull(Stack* stack, void* element);
 
 #endif

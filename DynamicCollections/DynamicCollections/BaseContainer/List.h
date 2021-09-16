@@ -9,8 +9,6 @@
 
 
 /*
- * List:
- * --------------------
  * Content
  * SizeOfSingleElement
  * Size: Number of all storage locations
@@ -22,69 +20,67 @@ typedef struct List_
 	unsigned int Size;
 }List;
 
-/*
- * Function:  ListInitialize
- * --------------------
- * Acts like a constructor
- * ! A list must be set to EMPTYLIST before each initialization
- * eg: 'List a = EMPTYLIST;'
- * --------------------
- */
+
+// Acts like a constructor
+// ! A list must be set to EMPTYLIST before each initialization
+// eg: 'List a = EMPTYLIST;'
+// @param list: Address of list object
+// @param count: Count of initial storage locations
+// @param sizeOfSingleElement: Size of used objects in bytes [sizeof(Type)]
 void ListInitialize(List* list, unsigned int count, size_t sizeOfSingleElement);
 
 void ListDestruction(List* list);
 
-/*
- * Function:  ListItemInsertAt
- * --------------------
- * Adds parameter value to index in parameter list->Content
- * --------------------
- *  returns: CollectionNoError
- *	   CollectionEmpty
- *	   CollectionArrayIndexOutOfBounds
- */
+// Adds parameter value to index in parameter list->Content
+// @param list: Address of list object
+// @param indexValue: insert at this position
+// @param value: That will be added
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
+* returns: CollectionNoError
+*	 CollectionEmpty
+*	 CollectionArrayIndexOutOfBounds
+*/
 CollectionError ListItemInsertAt(List* list, unsigned int indexValue, void* value);
 
-/*
- * Function:  ListItemGet
- * --------------------
- * Get value at transmitted index and saves it in out
- * --------------------
- *  returns: CollectionNoError
- *	   CollectionEmpty
- *	   CollectionArrayIndexOutOfBounds
- */
+// Gets value at transmitted index and saves it in out
+// @param list: Address of list object
+// @param index: position of desired object
+// @param out: contains the output
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
+* returns: CollectionNoError
+* CollectionEmpty
+* CollectionArrayIndexOutOfBounds
+*/
 CollectionError ListItemGet(List* list, unsigned int index, void* out);
 
-/*
- * Function:  ListItemAdd
- * --------------------
- * Adds parameter value to next free value in parameter list->Content
- *
- * When the List is full, it will be made bigger
- * --------------------
- *  returns: CollectionNoError
- *	   CollectionEmpty
- *	   CollectionOutOfMemory
- */
+// Adds parameter value to next free value in parameter list->Content
+// @param list: Address of list object
+// @param value: will be saved in list
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
+* returns: CollectionNoError
+*	 CollectionEmpty
+*	 CollectionOutOfMemory
+*/
 CollectionError ListItemAdd(List* list, void* value);
 
-/*
- * Function:  ListItemRemove
- * --------------------
- * Removes Element at index
- * --------------------
- *  returns: CollectionNoError
- *	   CollectionEmpty
- *	   CollectionArrayIndexOutOfBounds
- */
+// Removes Element at index
+// @param list: Address of list object
+// @param index: position of the object that will be removed
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
+* returns: CollectionNoError
+*	 CollectionEmpty
+*	 CollectionArrayIndexOutOfBounds
+*/
 CollectionError ListItemRemove(List* list, unsigned int index);
 
-/*
- * Function:  ListClear
- * --------------------
- * Sets all values in list->Content = 0
- * --------------------
+// Sets all values in list->Content to NULL
+// @param list: Address of list object
+// @return CollectionError: Errorcode that contains information about the operation.
+/* --------------------
  *  returns: CollectionNoError
  *	   CollectionEmpty
  */

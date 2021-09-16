@@ -2,7 +2,7 @@
 #define CollectionErrorInclude
 
 // Errorcode used in Containers.
-// Describes how a command has succseeded or failed.
+// Describes how a command has succeeded or failed.
 typedef enum CollectionError_
 {
 	// Successful / No Error
