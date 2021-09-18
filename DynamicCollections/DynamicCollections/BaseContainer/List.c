@@ -70,7 +70,7 @@ CollectionError ListItemGet(List* list, unsigned int index, void* out)
 	if(list->Content[index] == NULL)
 	{
 		int null = NULL;
-		memcpy(out, &null, sizeof(void*) * 2);
+		memcpy(out, &null, sizeof(void*));
 		return CollectionNoError;
 	}
 	
