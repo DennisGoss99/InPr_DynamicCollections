@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsigned int sizeOfValue)
+void DictionaryInitialize(Dictionary* dictionary, size_t sizeOfKey, size_t sizeOfValue)
 {
 	dictionary->Size = 0;
 	dictionary->SizeOfKey = sizeOfKey;
@@ -22,7 +22,7 @@ static void DeleteNode(DictionaryTreeItem* deleteNode)
 	free(deleteNode);
 }
 
-void DictionaryDestroy(Dictionary* dictionary)
+void DictionaryDestruction(Dictionary* dictionary)
 {
 	dictionary->Size = 0;
 	dictionary->SizeOfKey = 0;

@@ -1,5 +1,7 @@
 #ifndef DictionaryInclude
 #define DictionaryInclude
+#include <stddef.h>
+
 #include "CollectionError.h"
 
 #define EMPTYDICTIONARY (Dictionary){0}
@@ -22,8 +24,8 @@ typedef struct DictionaryTreeItem_
  */
 typedef struct Dictionary_
 {
-	unsigned int SizeOfKey;
-	unsigned int SizeOfValue;
+	size_t SizeOfKey;
+	size_t SizeOfValue;
 	unsigned int Size;
 
 	//Don't Touch
@@ -37,11 +39,11 @@ typedef struct Dictionary_
 // @param dictionary: Address of dictionary object
 // @param sizeOfKey: Size of used key objects in bytes [sizeof(Type)]
 // @param sizeOfValue: Size of used value objects in bytes [sizeof(Type)]
-void DictionaryInitialize(Dictionary* dictionary, unsigned int sizeOfKey, unsigned int sizeOfValue);
+void DictionaryInitialize(Dictionary* dictionary, size_t sizeOfKey, size_t sizeOfValue);
 
 // Frees all entries keys of this dictionary
 // @param dictionary: Address of dictionary object
-void DictionaryDestroy(Dictionary* dictionary);
+void DictionaryDestruction(Dictionary* dictionary);
 
 // Returns true if the dictionary contains the transmitted key
 // @param dictionary: Address of Dictionary object

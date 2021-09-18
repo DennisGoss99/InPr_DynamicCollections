@@ -12,11 +12,14 @@
 int main()
 {
     testPrintHeader("-----<Starting Tests>-----");
-
-    StackTestStart();
-    QueueTestStart();
-    LinkedListTestStart();
-
+	     
+    //StackTestStart();
+    //QueueTestStart();
+    //LinkedListTestStart();
+    while(1)
+    {
+	    
+    
     ListTestStart(); 
 
     DictionaryTestStart();
@@ -24,6 +27,6 @@ int main()
     StringTestStart();
 	
     testPrintSummery();
-    
+    }
     return 0;
 }

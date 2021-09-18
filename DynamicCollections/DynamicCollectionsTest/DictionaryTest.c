@@ -59,7 +59,7 @@ void DictionaryTests() {
 		test_int( 1, DictionaryContainsKey(&test, &testInt4), "Dictionary Add Test 6");
 		test_int(0, DictionaryContainsKey(&test, &testInt5), "Dictionary Add Test 7");
 	
-		DictionaryDestroy(&test);
+		DictionaryDestruction(&test);
 	}
 	
 
@@ -123,6 +123,6 @@ void DictionaryTests() {
 
 		test_int(0, test.Size, "Dictionary Remove Test 9");
 
-		DictionaryDestroy(&test);
+		DictionaryDestruction(&test);
 	}
 }
