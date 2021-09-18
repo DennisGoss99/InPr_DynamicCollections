@@ -1,3 +1,10 @@
+# Creators
+| Name | Martikelnummer | 
+|------|----------------|
+| Lukas Momberg | 11141259 |
+| Dennis Goßler | 11140150 |
+
+
 # Data Containers in C
 As we have a need to store data, there is a need for containers.
 Storeing this data can be a hassle, so we created a few solutions in the C-Programming language.
