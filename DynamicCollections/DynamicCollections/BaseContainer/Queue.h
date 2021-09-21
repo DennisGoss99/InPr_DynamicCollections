@@ -13,16 +13,16 @@ typedef struct Queue_
 	void* Content;
 
 	// Offset from 'Queue.Content' to the object that will be fetched next.
-	unsigned int DataOffset;
+	size_t DataOffset;
 
 	// Size of one object contained in 'Queue.Content'
-	unsigned int SizeOfSingleElement;
+	size_t SizeOfSingleElement;
 
 	// Used space of 'Queue.Content'
-	unsigned int SizeUsed;
+	size_t SizeUsed;
 
 	// Actual allocated size of 'Queue.Content'
-	unsigned int SizeAllocated;
+	size_t SizeAllocated;
 }Queue;
 
 // Initialize the Container. Call this directly after creation.

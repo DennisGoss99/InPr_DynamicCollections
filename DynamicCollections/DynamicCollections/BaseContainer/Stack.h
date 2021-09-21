@@ -13,13 +13,13 @@ typedef struct Stack_
 	void* Content;
 
 	// Size of one object contained in 'Stack.Content'
-	unsigned int SizeOfSingleElement;
+	size_t SizeOfSingleElement;
 
 	// Used space of 'Stack.Content'
-	unsigned int SizeUsed;
+	size_t SizeUsed;
 
 	// Actual allocated size of 'Stack.Content'
-	unsigned int SizeAllocated;
+	size_t SizeAllocated;
 }Stack;
 
 // Initialize the Container. Call this directly after creation.

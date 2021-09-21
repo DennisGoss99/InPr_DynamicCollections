@@ -17,7 +17,7 @@ typedef struct List_
 {
 	void** Content;
 	size_t SizeOfSingleElement;
-	unsigned int Size;
+	size_t Size;
 }List;
 
 
