@@ -2,6 +2,7 @@
 #define StackInclude
 
 #include "CollectionError.h"
+#include <stdlib.h>
 
 // Threshold where the container will be resized bigger than needed to reduce reallocations.
 #define StackThreshold 20u

@@ -1,6 +1,7 @@
 #ifndef LinkedListInclude
 #define LinkedListInclude
 
+#include <stdlib.h>
 #include "CollectionError.h"
 #include "LinkedListNode.h"
 
