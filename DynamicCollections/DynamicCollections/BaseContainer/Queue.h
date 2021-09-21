@@ -2,6 +2,7 @@
 #define QueueInclude
 
 #include "CollectionError.h"
+#include <stdlib.h>
 
 // Threshold where the container will be resized bigger than needed to reduce reallocations.
 #define QueueThreshold 20u
