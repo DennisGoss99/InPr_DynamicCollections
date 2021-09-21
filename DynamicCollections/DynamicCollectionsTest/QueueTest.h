@@ -4,5 +4,6 @@
 void QueueTestStart();
 
 static void QueueComplexTest();
+static void QueueMemoryLeakTests();
 
 #endif

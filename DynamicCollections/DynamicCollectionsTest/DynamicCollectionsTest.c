@@ -8,22 +8,33 @@
 #include "StringTest.h"
 #include "TestSystem/Tester.h"
 
+#define DEBUG_RepeatTestProgramForever 0
 
 int main()
 {
-    testPrintHeader("-----<Starting Tests>-----");
-	     
-    StackTestStart();
-    QueueTestStart();
-    LinkedListTestStart();
-    
-    ListTestStart(); 
 
-    DictionaryTestStart();
+#if DEBUG_RepeatTestProgramForever
+    while (1)
+    {
+#endif
 
-    StringTestStart();
-	
-    testPrintSummery();
+        testPrintHeader("-----<Starting Tests>-----");
+
+        StackTestStart();
+        QueueTestStart();
+        LinkedListTestStart();
+
+        ListTestStart();
+
+        DictionaryTestStart();
+
+        StringTestStart();
+
+        testPrintSummery();
+
+#if DEBUG_RepeatTestProgramForever
+    }
+#endif
     
     return 0;
 }

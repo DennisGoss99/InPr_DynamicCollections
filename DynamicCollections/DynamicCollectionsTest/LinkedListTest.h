@@ -8,5 +8,6 @@ static void LinkedListAddElementTest();
 static void LinkedListAddMultipleElementsTest();
 static void LinkedListRemoveAllElementsTest();
 static void LinkedListPrintContent(LinkedList* linkedList);
+static void LinkedListMemoryLeakTest();
 
 #endif

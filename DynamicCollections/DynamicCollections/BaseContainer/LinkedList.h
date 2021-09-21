@@ -12,10 +12,10 @@ typedef struct LinkedList_
 	LinkedListNode* FirstNode;
 
 	// Size of one object contained in 'Node-Chain'
-	unsigned int SizeOfSingleElement;
+	size_t SizeOfSingleElement;
 
 	// Amount of elements in 'Node-Chain'
-	unsigned int Size;
+	size_t Size;
 }LinkedList;
 
 // Initialize the Container. Call this directly after creation.
